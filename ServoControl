@@ -1,0 +1,41 @@
+import Adafruit_BBIO.ADC as ADC
+import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.PWM as PWM
+import time
+
+servo= "P8_13"
+CDS = "P9_40"
+
+ADC.setup()
+PWM.start(servo,0, 50)
+
+while(1):
+    
+    Command = raw_input("Servo position? (1/2/0/x):")
+  
+    if Command == '1':
+        print("Position 1")
+        PWM.set_duty_cycle(servo, 5)
+    if Command == '2':
+        print("Position 2")
+        PWM.set_duty_cycle(servo, 10)
+        
+    if Command == '0':
+        print("0 percent")
+        PWM.set_duty_cycle(servo, 0)    
+        
+    
+    if Command == 'x':
+    
+        print("Program end")
+        PWM.stop("P8_13")
+        PWM.cleanup()
+        exit()
+
+
+    
+
+#    CDSreading = ADC.read(CDS)
+#    print(str(CDSreading))
+#    time.sleep(.1)
+    
